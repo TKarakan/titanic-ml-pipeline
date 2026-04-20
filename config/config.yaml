@@ -1,0 +1,18 @@
+project_name: 
+  name: "titanic_survival"
+  version: "1.0.0"
+
+paths:
+  raw_data: "data/raw/train.csv"
+  processed_data_dir: "data/processed"
+  model_export_dir: "models/"
+  submission_dir: "outputs/submissions"
+
+model_params:
+  test_size: 0.2  
+  random_state: 42
+
+logging:
+  log_file_path: "logs/titanic_project.log"
+  level: "INFO"
+              

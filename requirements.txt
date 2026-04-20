@@ -1,0 +1,23 @@
+# Veri İşleme ve Analiz
+pandas
+numpy
+openpyxl
+
+# Makine Öğrenmesi
+scikit-learn
+xgboost
+joblib
+
+# Deney Takibi ve Görselleştirme
+mlflow
+matplotlib
+seaborn
+
+# API ve Web Sunucusu
+fastapi
+uvicorn
+pyyaml
+
+# Web Arayüzü (Streamlit)
+streamlit
+requests

@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  # FastAPI servisi
+  api:
+    build: .
+    container_name: titanic_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./outputs:/app/outputs
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    # Healthcheck'i koda uygun hale getirdik
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Streamlit Web Arayüzü
+  ui:
+    build: .
+    container_name: titanic_ui
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONPATH=/app
+      - API_URL=http://api:8000
+    command: ["streamlit", "run", "src/web/ui.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    depends_on:
+      api:
+        condition: service_healthy # API tamamen hazır olmadan UI'ı başlatma
+    restart: unless-stopped
+
+  # MLflow UI servisi
+  mlflow:
+    image: python:3.11-slim
+    container_name: titanic_mlflow
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    command: >
+      bash -c "pip install mlflow --quiet &&
+                mlflow ui --host 0.0.0.0 --port 5000"
+    restart: unless-stopped
