@@ -54,6 +54,14 @@ titanic/
 ```
 
 ---
+<details>
+  <summary><b>🎥ui: (Tıkla ve Aç)</b></summary>
+
+https://github.com/user-attachments/assets/39f7bb5c-0a96-435c-a760-91bb0c62240b
+
+</details>
+---
+
 
 ## ⚙️ Teknoloji Yığını
 
